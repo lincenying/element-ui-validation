@@ -1,0 +1,28 @@
+{
+  "name": "element-ui-validation",
+  "version": "1.0.0",
+  "description": "element-ui validation",
+  "main": "dist/bundle.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lincenying/element-ui-validation.git"
+  },
+  "keywords": [
+    "element-ui",
+    "validation"
+  ],
+  "author": "LinCenYing",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lincenying/element-ui-validation/issues"
+  },
+  "homepage": "https://github.com/lincenying/element-ui-validation#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-loader": "^8.0.2",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.1"
+  }
+}
