@@ -18,25 +18,33 @@ rules: {
     ____1: rules.money('金额'),
 
     // 输入框规则 rules.string('提示文字', 最大长度, 最小长度)
-    ____2: rules.string('地址'),
+    string1: rules.string('地址'),
+    string2: rules.string('密码', null, 6), // 最短6位
+    string3: rules.string('密码', 16, 6), // 6-16位
 
     // 下拉框, 单选框, 复选框规则
-    ____3: rules.select('城市'),
+    select1: rules.select('城市'),
+    select2: rules.select('城市', true), // 多选
 
     // 网址规则
-    ____4: rules.url('网址'),
+    url: rules.url('网址'),
 
     // 整数规则
-    ____5: rules.integer('人数'),
+    integer1: rules.integer('人数'),
+    integer2: rules.integer('人数', 100), // 最大值
+    integer3: rules.integer('人数', 100, 10), // 10-100
 
     // 金额规则 rules.money_max_min('提示文字', 最大值, 最小值)
-    ____6: rules.money_max_min('金额', 0.8, 0),
+    money: rules.money('金额', 0.8, 0),
 
     // 手机号规则
-    ____7: rules.phone('手机号码'),
+    phone: rules.phone('手机号码'),
 
     // 银行卡规则
-    ____8: rules.bank_card('银行卡'),
+    bank_card: rules.bank_card('银行卡'),
+
+    // 邮箱
+    email: rules.email('邮箱'),
 }
 ```
 
