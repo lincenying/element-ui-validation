@@ -2,6 +2,13 @@
 
 element-ui 验证规则
 
+##### install
+
+```bash
+yarn add element-ui-validation
+# or
+npm install element-ui-validation --save
+```
 
 ```javascript
 import rules from 'element-ui-validation'
