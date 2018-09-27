@@ -101,7 +101,7 @@ export default {
             }
         ];
     },
-    back_card: text => {
+    bank_card: text => {
         return [
             {
                 required: true,
