@@ -36,7 +36,7 @@ rules: {
     ____7: rules.phone('手机号码'),
 
     // 银行卡规则
-    ____8: rules.back_card('银行卡'),
+    ____8: rules.bank_card('银行卡'),
 }
 ```
 
