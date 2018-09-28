@@ -1,3 +1,5 @@
+const isNumber = num => num === Number(num)
+
 export default {
     // 字符串类型, 即一般文本框
     string: (text, max, min) => {
@@ -76,19 +78,19 @@ export default {
                 trigger: "blur"
             },
             {
-                pattern: /^(([1-9]\d{0,9})|([1-9]\d{0,9})(\.\d{1,2})|(0\.0[1-9])|(0\.[1-9][0-9]{0,1}))$/,
+                pattern: /^(([1-9]\d*)|([1-9]\d*)(\.\d{1,2})|(0\.0[1-9]{1})|(0\.[1-9][0-9]{0,1}))$/,
                 message: text + "只能是数字和小数点后面两位",
                 trigger: "blur"
             }
         ];
-        if (Number.isFinite(max) || Number.isFinite(min)) {
+        if (isNumber(max) || isNumber(min)) {
             $return.push({
                 type: "string",
                 validator: (rule, value, callback) => {
-                    if (Number.isFinite(max) && Number(value) > max) {
+                    if (isNumber(max) && Number(value) > max) {
                         return callback(new Error(text + "不能大于" + max));
                     }
-                    if (Number.isFinite(min) && Number(value) < min) {
+                    if (isNumber(min) && Number(value) < min) {
                         return callback(new Error(text + "不能小于" + min));
                     }
                     callback();
