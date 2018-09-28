@@ -35,7 +35,7 @@ export default {
             }
         ];
     },
-    // 字符串型的数字, 通过正则匹配, 可限制最大值最小值
+    // 字符串型的整数(包含0), 通过正则匹配, 可限制最大值最小值
     integer: (text, max, min) => {
         const $return = [
             {
@@ -45,7 +45,7 @@ export default {
             },
             {
                 type: "string",
-                pattern: /^[1-9][\d]*$/,
+                pattern: /^(([0]{1})|([1-9][0-9]*))$/,
                 message: text + "只能是整数",
                 trigger: "blur"
             }
