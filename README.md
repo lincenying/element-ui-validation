@@ -29,11 +29,20 @@ import rules from 'element-ui-validation'
 
 export default {
     data() {
+        // 自定义规则
+        const validator = (rule, value, callback) => {
+            if (Number(this.int2) < Number(this.int1)) {
+                return callback(new Error('int2不能小于int1'))
+            }
+            callback()
+        }
         return {
             form: {
                 string1: '',
                 string2: '',
-                string3: ''
+                string3: '',
+                int1: '',
+                int2: ''
             },
             data: {
                 rules: {
@@ -53,6 +62,15 @@ export default {
                     integer1: rules.integer('人数'),
                     integer2: rules.integer('人数', 100), // 最大值
                     integer3: rules.integer('人数', 100, 10), // 10-100
+                    // 自行新增规则
+                    integer4: [
+                        ...rules.integer('人数'),
+                        {
+                            type: 'string',
+                            validator,
+                            trigger: 'blur'
+                        }
+                    ],
 
                     // 金额规则 rules.money('提示文字', 最大值, 最小值)
                     money: rules.money('金额', 0.8, 0),
