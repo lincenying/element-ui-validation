@@ -49,7 +49,7 @@ export default {
                     // 网址规则
                     url: rules.url('网址'),
 
-                    // 整数规则
+                    // 整数规则(包含0)
                     integer1: rules.integer('人数'),
                     integer2: rules.integer('人数', 100), // 最大值
                     integer3: rules.integer('人数', 100, 10), // 10-100
