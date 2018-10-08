@@ -29,7 +29,7 @@ export default {
         return [
             {
                 required: true,
-                message: "请输入" + text,
+                message: text + '格式不正确',
                 type: "url",
                 trigger: "blur"
             }
@@ -143,6 +143,22 @@ export default {
             {
                 type: "string",
                 pattern: /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/,
+                message: text + "格式不正确",
+                trigger: "blur"
+            }
+        ];
+    },
+    // QQ号
+    qq: text => {
+        return [
+            {
+                required: true,
+                message: text + "不能为空",
+                trigger: "blur"
+            },
+            {
+                type: "string",
+                pattern: /^[1-9][0-9]{4,10}$/,
                 message: text + "格式不正确",
                 trigger: "blur"
             }
