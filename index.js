@@ -39,35 +39,27 @@ export default {
             }
         ];
     },
-    // 字符串型的整数(包含0), 通过正则匹配, 可限制最大值最小值
-    integer: (text, max, min, int) => {
-        const $return = [
-            {
-                required: true,
-                message: "请输入" + text,
-                trigger: "blur"
-            }
-        ];
-        if (!int) {
-            $return.push({
-                type: "string",
-                pattern: /^(([0]{1})|([1-9][0-9]*))$/,
-                message: text + "只能是整数",
-                trigger: "blur"
-            })
-        } else {
-            $return.push({
-                validator: (rule, value, callback) => {
-                    if (!isInteger(value)) {
+    // 整数(包含0), 通过正则匹配, 可限制最大值最小值
+    integer: (text, max, min) => {
+        const $return = []
+        $return.push({
+            required: true,
+            validator: (rule, value, callback) => {
+                if (value === '') {
+                    return callback(new Error(text + "不能为空"));
+                } else {
+                    const preg = /^(([0]{1})|([1-9][0-9]*))$/
+                    if (!preg.test(value)) {
                         return callback(new Error(text + "只能是整数"));
                     }
-                    callback();
-                },
-                trigger: "blur"
-            });
-        }
+                }
+                callback();
+            },
+            trigger: "blur"
+        });
         if (isInteger(max) || isInteger(min)) {
             $return.push({
+                required: true,
                 validator: (rule, value, callback) => {
                     if (isInteger(max) && Number(value) > max) {
                         return callback(new Error(text + "不能大于" + max));
@@ -85,22 +77,25 @@ export default {
     // 金额类型, 通过正则验证, 支持小数点后两位, 且可以限制最大值和最小值
     money: (text, max, min) => {
         text = text || "金额";
-        const $return = [
-            {
-                type: "string",
-                required: true,
-                message: "请输入" + text,
-                trigger: "blur"
+        const $return = []
+        $return.push({
+            required: true,
+            validator: (rule, value, callback) => {
+                if (value === '') {
+                    return callback(new Error(text + "不能为空"));
+                } else {
+                    const preg = /^(([0]{1})|([1-9]\d*)|([1-9]\d*)(\.\d{1,2})|(0\.0[1-9]{1})|(0\.[1-9][0-9]{0,1}))$/
+                    if (!preg.test(value)) {
+                        return callback(new Error(text + "只能是数字和小数点后面两位"));
+                    }
+                }
+                callback();
             },
-            {
-                pattern: /^(([1-9]\d*)|([1-9]\d*)(\.\d{1,2})|(0\.0[1-9]{1})|(0\.[1-9][0-9]{0,1}))$/,
-                message: text + "只能是数字和小数点后面两位",
-                trigger: "blur"
-            }
-        ];
+            trigger: "blur"
+        });
         if (isNumber(max) || isNumber(min)) {
             $return.push({
-                type: "string",
+                required: true,
                 validator: (rule, value, callback) => {
                     if (isNumber(max) && Number(value) > max) {
                         return callback(new Error(text + "不能大于" + max));

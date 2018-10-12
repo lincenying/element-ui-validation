@@ -1,6 +1,6 @@
 {
   "name": "element-ui-validation",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "element-ui validation",
   "main": "dist/bundle.js",
   "repository": {

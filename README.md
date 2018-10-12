@@ -59,15 +59,13 @@ export default {
                     url: rules.url('网址'),
 
                     // 整数规则(包含0)
-                    integer1: rules.integer('人数'), // 验证值需要是字符型的数字
-                    integer2: rules.integer('人数', 100), // 最大值100, 验证值需要是字符型的数字
-                    integer3: rules.integer('人数', 100, 10), // 10-100, 验证值需要是字符型的数字
-                    integer3: rules.integer('人数', 100, 10, true), // 10-100, 验证值值必须是数值型的数字
+                    integer1: rules.integer('人数'),
+                    integer2: rules.integer('人数', 100), // 最大值100
+                    integer3: rules.integer('人数', 100, 10), // 10-100
                     // 自行新增规则
                     integer4: [
                         ...rules.integer('人数'),
                         {
-                            type: 'string',
                             validator,
                             trigger: 'blur'
                         }
