@@ -36,23 +36,34 @@ export default {
         ];
     },
     // 字符串型的整数(包含0), 通过正则匹配, 可限制最大值最小值
-    integer: (text, max, min) => {
+    integer: (text, max, min, int) => {
         const $return = [
             {
                 required: true,
                 message: "请输入" + text,
                 trigger: "blur"
-            },
-            {
+            }
+        ];
+        if (!int) {
+            $return.push({
                 type: "string",
                 pattern: /^(([0]{1})|([1-9][0-9]*))$/,
                 message: text + "只能是整数",
                 trigger: "blur"
-            }
-        ];
+            })
+        } else {
+            $return.push({
+                validator: (rule, value, callback) => {
+                    if (!Number.isInteger(value)) {
+                        return callback(new Error(text + "只能是整数"));
+                    }
+                    callback();
+                },
+                trigger: "blur"
+            });
+        }
         if (Number.isInteger(max) || Number.isInteger(min)) {
             $return.push({
-                type: "string",
                 validator: (rule, value, callback) => {
                     if (Number.isInteger(max) && Number(value) > max) {
                         return callback(new Error(text + "不能大于" + max));
