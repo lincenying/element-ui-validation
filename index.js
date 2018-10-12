@@ -1,5 +1,9 @@
 const isNumber = num => num === Number(num)
 
+const isInteger = Number.isInteger || function(value) {
+    return typeof value === 'number' && isFinite(value) && Math.floor(value) === value;
+}
+
 export default {
     // 字符串类型, 即一般文本框
     string: (text, max, min) => {
@@ -9,8 +13,8 @@ export default {
             message: "请输入" + text,
             trigger: "blur"
         };
-        if (Number.isInteger(max)) rules.max = max;
-        if (Number.isInteger(min)) rules.min = min;
+        if (isInteger(max)) rules.max = max;
+        if (isInteger(min)) rules.min = min;
         return [rules];
     },
     // 选择类型, 如 单选框, 复选框, 下拉框 之类的
@@ -54,7 +58,7 @@ export default {
         } else {
             $return.push({
                 validator: (rule, value, callback) => {
-                    if (!Number.isInteger(value)) {
+                    if (!isInteger(value)) {
                         return callback(new Error(text + "只能是整数"));
                     }
                     callback();
@@ -62,13 +66,13 @@ export default {
                 trigger: "blur"
             });
         }
-        if (Number.isInteger(max) || Number.isInteger(min)) {
+        if (isInteger(max) || isInteger(min)) {
             $return.push({
                 validator: (rule, value, callback) => {
-                    if (Number.isInteger(max) && Number(value) > max) {
+                    if (isInteger(max) && Number(value) > max) {
                         return callback(new Error(text + "不能大于" + max));
                     }
-                    if (Number.isInteger(min) && Number(value) < min) {
+                    if (isInteger(min) && Number(value) < min) {
                         return callback(new Error(text + "不能小于" + min));
                     }
                     callback();
