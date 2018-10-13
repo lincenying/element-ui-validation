@@ -4,7 +4,7 @@ const isInteger = Number.isInteger || function(value) {
     return typeof value === 'number' && isFinite(value) && Math.floor(value) === value;
 }
 
-export default {
+const Rules = {
     // 字符串类型, 即一般文本框
     string: (text, max, min) => {
         const rules = {
@@ -175,3 +175,4 @@ export default {
         ];
     }
 };
+export default Rules

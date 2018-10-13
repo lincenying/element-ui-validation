@@ -7,6 +7,8 @@ module.exports = {
     },
     output: {
         filename: "bundle.js",
+        library: "Rules",
+        libraryExport: "default",
         libraryTarget: 'umd'
     },
     module: {
