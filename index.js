@@ -7,27 +7,40 @@ const isInteger = Number.isInteger || function(value) {
 const Rules = {
     // 字符串类型, 即一般文本框
     string: (text, max, min) => {
-        const rules = {
+        const rules = [{
             type: "string",
             required: true,
             message: "请输入" + text,
             trigger: "blur"
-        };
-        if (isInteger(max)) rules.max = max;
-        if (isInteger(min)) rules.min = min;
-        return [rules];
+        }];
+        if (isInteger(max) || isInteger(min)) {
+            rules.push({
+                required: true,
+                validator: (rule, value, callback) => {
+                    if (isInteger(max) && value.length > max) {
+                        return callback(new Error(text + "长度不能大于" + max));
+                    }
+                    if (isInteger(min) && value.length < min) {
+                        return callback(new Error(text + "长度不能小于" + min));
+                    }
+                    callback();
+                },
+                trigger: "blur"
+            });
+        }
+        return rules;
     },
     // 选择类型, 如 单选框, 复选框, 下拉框 之类的
     select: (text, multiple) => {
-        const $return = {
+        const rules = {
             required: true,
             message: "请选择" + text,
             trigger: "change"
         };
         if (multiple) {
-            $return.type = "array";
+            rules.type = "array";
         }
-        return [$return];
+        return [rules];
     },
     url: text => {
         return [
@@ -41,8 +54,8 @@ const Rules = {
     },
     // 整数(包含0), 通过正则匹配, 可限制最大值最小值
     integer: (text, max, min) => {
-        const $return = []
-        $return.push({
+        const rules = []
+        rules.push({
             required: true,
             validator: (rule, value, callback) => {
                 if (value === '') {
@@ -58,7 +71,7 @@ const Rules = {
             trigger: "blur"
         });
         if (isInteger(max) || isInteger(min)) {
-            $return.push({
+            rules.push({
                 required: true,
                 validator: (rule, value, callback) => {
                     if (isInteger(max) && Number(value) > max) {
@@ -72,13 +85,13 @@ const Rules = {
                 trigger: "blur"
             });
         }
-        return $return;
+        return rules;
     },
     // 金额类型, 通过正则验证, 支持小数点后两位, 且可以限制最大值和最小值
     money: (text, max, min) => {
         text = text || "金额";
-        const $return = []
-        $return.push({
+        const rules = []
+        rules.push({
             required: true,
             validator: (rule, value, callback) => {
                 if (value === '') {
@@ -94,7 +107,7 @@ const Rules = {
             trigger: "blur"
         });
         if (isNumber(max) || isNumber(min)) {
-            $return.push({
+            rules.push({
                 required: true,
                 validator: (rule, value, callback) => {
                     if (isNumber(max) && Number(value) > max) {
@@ -108,7 +121,7 @@ const Rules = {
                 trigger: "blur"
             });
         }
-        return $return;
+        return rules;
     },
     // 国内通用手机号码
     phone: text => {
