@@ -6,7 +6,7 @@ const isInteger = Number.isInteger || function(value) {
 
 const Rules = {
     // 字符串类型, 即一般文本框
-    string: (text, max, min) => {
+    string: (text, max, min, trigger) => {
         const rules = [{
             type: "string",
             required: true,
@@ -53,7 +53,7 @@ const Rules = {
         ];
     },
     // 整数(包含0), 通过正则匹配, 可限制最大值最小值
-    integer: (text, max, min) => {
+    integer: (text, max, min, trigger) => {
         const rules = []
         rules.push({
             required: true,
@@ -68,7 +68,7 @@ const Rules = {
                 }
                 callback();
             },
-            trigger: "blur"
+            trigger: trigger || "blur"
         });
         if (isInteger(max) || isInteger(min)) {
             rules.push({
@@ -82,13 +82,13 @@ const Rules = {
                     }
                     callback();
                 },
-                trigger: "blur"
+                trigger: trigger || "blur"
             });
         }
         return rules;
     },
     // 金额类型, 通过正则验证, 支持小数点后两位, 且可以限制最大值和最小值
-    money: (text, max, min) => {
+    money: (text, max, min, trigger) => {
         text = text || "金额";
         const rules = []
         rules.push({
@@ -104,7 +104,7 @@ const Rules = {
                 }
                 callback();
             },
-            trigger: "blur"
+            trigger: trigger || "blur"
         });
         if (isNumber(max) || isNumber(min)) {
             rules.push({
@@ -118,7 +118,7 @@ const Rules = {
                     }
                     callback();
                 },
-                trigger: "blur"
+                trigger: trigger || "blur"
             });
         }
         return rules;
