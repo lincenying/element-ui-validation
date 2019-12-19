@@ -6,10 +6,10 @@ const isInteger =
         return typeof value === 'number' && isFinite(value) && Math.floor(value) === value
     }
 
-const Rules = {
+class Rules {
     // 字符串类型, 即一般文本框
     // eslint-disable-next-line max-params
-    string: (text, max, min, trigger, required = true) => {
+    string(text, max, min, trigger, required = true) {
         const rules = [
             {
                 type: 'string',
@@ -34,9 +34,9 @@ const Rules = {
             })
         }
         return rules
-    },
+    }
     // 选择类型, 如 单选框, 复选框, 下拉框 之类的
-    select: (text, multiple) => {
+    select(text, multiple) {
         const rules = {
             required: true,
             message: '请选择' + text,
@@ -46,8 +46,8 @@ const Rules = {
             rules.type = 'array'
         }
         return [rules]
-    },
-    url: (text, required = true) => {
+    }
+    url(text, required = true) {
         return [
             {
                 required,
@@ -56,10 +56,10 @@ const Rules = {
                 trigger: 'blur'
             }
         ]
-    },
+    }
     // 整数(包含0), 通过正则匹配, 可限制最大值最小值
     // eslint-disable-next-line max-params
-    integer: (text, max, min, trigger, required = true) => {
+    integer(text, max, min, trigger, required = true) {
         const rules = []
         rules.push({
             required,
@@ -92,10 +92,10 @@ const Rules = {
             })
         }
         return rules
-    },
+    }
     // 金额类型, 通过正则验证, 支持小数点后两位, 且可以限制最大值和最小值
     // eslint-disable-next-line max-params
-    money: (text, max, min, trigger, required = true) => {
+    money(text, max, min, trigger, required = true) {
         text = text || '金额'
         const rules = []
         rules.push({
@@ -129,9 +129,9 @@ const Rules = {
             })
         }
         return rules
-    },
+    }
     // 国内通用手机号码
-    phone: (text, required = true) => {
+    phone(text, required = true) {
         return [
             {
                 required,
@@ -145,9 +145,9 @@ const Rules = {
                 trigger: 'blur'
             }
         ]
-    },
+    }
     // 国内通用银行卡
-    bank_card: (text, required = true) => {
+    bank_card(text, required = true) {
         return [
             {
                 required,
@@ -161,9 +161,9 @@ const Rules = {
                 trigger: 'blur'
             }
         ]
-    },
+    }
     // 邮箱验证
-    email: (text, required = true) => {
+    email(text, required = true) {
         return [
             {
                 required,
@@ -177,9 +177,9 @@ const Rules = {
                 trigger: 'blur'
             }
         ]
-    },
+    }
     // QQ号
-    qq: (text, required = true) => {
+    qq(text, required = true) {
         return [
             {
                 required,
@@ -195,4 +195,4 @@ const Rules = {
         ]
     }
 }
-export default Rules
+export default new Rules()
