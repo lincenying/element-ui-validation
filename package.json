@@ -1,6 +1,6 @@
 {
   "name": "element-ui-validation",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "element-ui validation",
   "main": "dist/bundle.js",
   "repository": {
@@ -19,10 +19,10 @@
   "homepage": "https://github.com/lincenying/element-ui-validation#readme",
   "dependencies": {},
   "devDependencies": {
-    "@babel/core": "^7.1.0",
-    "@babel/preset-env": "^7.1.0",
-    "babel-loader": "^8.0.2",
-    "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.1"
+    "@babel/core": "^7.3.3",
+    "@babel/preset-env": "^7.3.1",
+    "babel-loader": "^8.0.5",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
   }
 }

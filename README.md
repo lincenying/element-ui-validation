@@ -10,6 +10,66 @@ yarn add element-ui-validation
 npm install element-ui-validation --save
 ```
 
+```javascript
+// api:
+
+// 主要验证普通文本框
+rules.string(text: String, max: Number, min: Number, trigger: String, required: Boolean)
+// text: 提示文本
+// max: 被验证字符串最大长度
+// min: 被验证字符串最小长度
+// trigger: 触发事件: 默认为`blur`
+// required: 是否允许为空, 当为true时, 不能为空, 且必须符合其他验证规则, 当为false时, 可以为空, 但是不为空时, 需符合其他验证规则
+
+// 主要验证下拉框, 复选框, 单选框之类
+rules.select(text: String, multiple: Boolean)
+// text: 提示文本
+// multiple: 是否为数组
+
+// 验证网址类
+rules.url(text: String, required: Boolean)
+// text: 提示文本
+// required: 是否允许为空, 当为true时, 不能为空, 且必须符合Url规则, 当为false时, 可以为空, 但是不为空时, 需符合Url规则
+
+// 整数(包含0), 通过正则匹配, 可限制最大值最小值
+rules.integer(text: String, max: Number, min: Number, trigger: String, required: Boolean)
+// text: 提示文本
+// max: 被验证数值最大值 (注意: 非长度)
+// min: 被验证数值最小值 (注意: 非长度)
+// trigger: 触发事件: 默认为`blur`, 可以改成`change`
+// required: 是否允许为空, 当为true时, 不能为空, 且必须符合其他验证规则, 当为false时, 可以为空, 但是不为空时, 需符合其他验证规则
+
+// 金额类型, 通过正则验证, 支持小数点后两位, 且可以限制最大值和最小值
+rules.money(text: String, max: Number, min: Number, trigger: String, required: Boolean)
+// text: 提示文本
+// max: 被验证数值最大值 (注意: 非长度)
+// min: 被验证数值最小值 (注意: 非长度)
+// trigger: 触发事件: 默认为`blur`, 可以改成`change`
+// required: 是否允许为空, 当为true时, 不能为空, 且必须符合其他验证规则, 当为false时, 可以为空, 但是不为空时, 需符合其他验证规则
+
+// 国内通用手机号码
+rules.phone(text: String, required: Boolean)
+// text: 提示文本
+// required: 是否允许为空, 当为true时, 不能为空, 且必须符合手机号码规则, 当为false时, 可以为空, 但是不为空时, 需符合手机号码规则
+
+// 国内通用银行卡
+rules.bank_card(text: String, required: Boolean)
+// text: 提示文本
+// required: 是否允许为空, 当为true时, 不能为空, 且必须符合银行卡规则, 当为false时, 可以为空, 但是不为空时, 需符合银行卡规则
+
+// 邮箱验证
+rules.email(text: String, required: Boolean)
+// text: 提示文本
+// required: 是否允许为空, 当为true时, 不能为空, 且必须符合邮箱规则, 当为false时, 可以为空, 但是不为空时, 需符合邮箱规则
+
+// QQ号
+rules.qq(text: String, required: Boolean)
+// text: 提示文本
+// required: 是否允许为空, 当为true时, 不能为空, 且必须符合QQ号规则, 当为false时, 可以为空, 但是不为空时, 需符合QQ号规则
+
+
+```
+
 ```html
 <el-form :model="data.form" :rules="data.rules" ref="ref">
     <el-form-item label="地址：" label-width="120px" prop="string1">
