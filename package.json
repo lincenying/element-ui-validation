@@ -7,7 +7,7 @@
   "files": [
     "dist/bundle.js",
     "types/*.d.ts"
-  ]
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lincenying/element-ui-validation.git"
