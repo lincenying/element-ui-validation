@@ -22,7 +22,7 @@ class Rules {
             rules.push({
                 required,
                 validator: (rule, value, callback) => {
-                    if (!required && value === '') {
+                    if (!required && (value === '' || value === null || value === undefined)) {
                         return callback()
                     }
                     if (isInteger(max) && value.length > max) {
@@ -67,10 +67,10 @@ class Rules {
         rules.push({
             required,
             validator: (rule, value, callback) => {
-                if (!required && value === '') {
+                if (!required && (value === '' || value === null || value === undefined)) {
                     return callback()
                 }
-                if (value === '') {
+                if (required && value === '') {
                     return callback(new Error(text + '不能为空'))
                 }
                 const preg = /^(([0]{1})|([1-9][0-9]*))$/
@@ -86,7 +86,7 @@ class Rules {
             rules.push({
                 required,
                 validator: (rule, value, callback) => {
-                    if (!required && value === '') {
+                    if (!required && (value === '' || value === null || value === undefined)) {
                         return callback()
                     }
                     if (isInteger(max) && Number(value) > max) {
@@ -110,10 +110,10 @@ class Rules {
         rules.push({
             required,
             validator: (rule, value, callback) => {
-                if (!required && value === '') {
+                if (!required && (value === '' || value === null || value === undefined)) {
                     return callback()
                 }
-                if (value === '') {
+                if (required && value === '') {
                     return callback(new Error(text + '不能为空'))
                 }
                 const preg = /^(([0]{1})|([1-9]\d*)|([1-9]\d*)(\.\d{1,2})|(0\.0[1-9]{1})|(0\.[1-9][0-9]{0,1}))$/
@@ -129,7 +129,7 @@ class Rules {
             rules.push({
                 required,
                 validator: (rule, value, callback) => {
-                    if (!required && value === '') {
+                    if (!required && (value === '' || value === null || value === undefined)) {
                         return callback()
                     }
                     if (isNumber(max) && Number(value) > max) {
