@@ -22,6 +22,9 @@ class Rules {
             rules.push({
                 required,
                 validator: (rule, value, callback) => {
+                    if (!required && value === '') {
+                        return callback()
+                    }
                     if (isInteger(max) && value.length > max) {
                         return callback(new Error(text + '长度不能大于' + max))
                     }
@@ -64,6 +67,9 @@ class Rules {
         rules.push({
             required,
             validator: (rule, value, callback) => {
+                if (!required && value === '') {
+                    return callback()
+                }
                 if (value === '') {
                     return callback(new Error(text + '不能为空'))
                 }
@@ -77,6 +83,9 @@ class Rules {
             trigger: trigger || 'blur'
         })
         if (isInteger(max) || isInteger(min)) {
+            if (!required && value === '') {
+                return callback()
+            }
             rules.push({
                 required,
                 validator: (rule, value, callback) => {
@@ -101,6 +110,9 @@ class Rules {
         rules.push({
             required,
             validator: (rule, value, callback) => {
+                if (!required && value === '') {
+                    return callback()
+                }
                 if (value === '') {
                     return callback(new Error(text + '不能为空'))
                 }
@@ -114,6 +126,9 @@ class Rules {
             trigger: trigger || 'blur'
         })
         if (isNumber(max) || isNumber(min)) {
+            if (!required && value === '') {
+                return callback()
+            }
             rules.push({
                 required,
                 validator: (rule, value, callback) => {
