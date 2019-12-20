@@ -83,12 +83,12 @@ class Rules {
             trigger: trigger || 'blur'
         })
         if (isInteger(max) || isInteger(min)) {
-            if (!required && value === '') {
-                return callback()
-            }
             rules.push({
                 required,
                 validator: (rule, value, callback) => {
+                    if (!required && value === '') {
+                        return callback()
+                    }
                     if (isInteger(max) && Number(value) > max) {
                         return callback(new Error(text + '不能大于' + max))
                     }
@@ -126,12 +126,12 @@ class Rules {
             trigger: trigger || 'blur'
         })
         if (isNumber(max) || isNumber(min)) {
-            if (!required && value === '') {
-                return callback()
-            }
             rules.push({
                 required,
                 validator: (rule, value, callback) => {
+                    if (!required && value === '') {
+                        return callback()
+                    }
                     if (isNumber(max) && Number(value) > max) {
                         return callback(new Error(text + '不能大于' + max))
                     }
