@@ -261,14 +261,14 @@ class Rules {
                     91: '国外 '
                 }
                 let tip = ''
-                if (!code || !/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i.test(code)) {
+                if (!value || !/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i.test(value)) {
                     tip = '格式错误'
-                } else if (!city[code.substr(0, 2)]) {
+                } else if (!city[value.substr(0, 2)]) {
                     tip = '地址编码错误'
                 } else {
                     //18位身份证需要验证最后一位校验位
-                    if (code.length == 18) {
-                        code = code.split('')
+                    if (value.length == 18) {
+                        const arr_value = value.split('')
                         //∑(ai×Wi)(mod 11)
                         //加权因子
                         const factor = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2]
@@ -278,11 +278,11 @@ class Rules {
                         let ai = 0
                         let wi = 0
                         for (let i = 0; i < 17; i++) {
-                            ai = code[i]
+                            ai = arr_value[i]
                             wi = factor[i]
                             sum += ai * wi
                         }
-                        if (parity[sum % 11] != code[17]) {
+                        if (parity[sum % 11] != arr_value[17]) {
                             tip = '校验位错误'
                         }
                     }
