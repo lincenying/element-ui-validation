@@ -4,6 +4,8 @@ element-ui 验证规则
 
 ```
 更新日志:
+v1.3.3
++ 新增了身份证号码的验证
 
 v1.2.2
 + 新增了d.ts文件, 在vscode中可以提示方法和参数
@@ -153,6 +155,9 @@ export default {
 
                     // 银行卡规则
                     bank_card: rules.bank_card('银行卡'),
+
+                    // 身份证规则
+                    idcard: rules.bank_card('身份证'),
 
                     // 邮箱
                     email: rules.email('邮箱'),
