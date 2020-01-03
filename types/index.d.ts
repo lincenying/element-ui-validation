@@ -107,5 +107,16 @@ declare namespace Rules {
         validator?: any
         pattern?: any
     }[]
+    export function idcard(
+        text: string,
+        required?: boolean
+    ): {
+        type: string
+        required?: boolean
+        message: string
+        trigger: string
+        validator?: any
+        pattern?: any
+    }[]
 }
 export = Rules;

@@ -76,6 +76,11 @@ rules.qq(text: String, required?: Boolean)
 // text: 提示文本
 // required: (默认: true) 是否允许为空, 当为true时, 不能为空, 且必须符合QQ号规则, 当为false时, 可以为空, 但是不为空时, 需符合QQ号规则
 
+// 身份证号码
+rules.idcard(text: String, required?: Boolean)
+// text: 提示文本
+// required: (默认: true) 是否允许为空, 当为true时, 不能为空, 且必须符合身份证号码规则, 当为false时, 可以为空, 但是不为空时, 需符合QQ号规则
+
 
 ```
 
