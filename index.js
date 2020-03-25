@@ -6,14 +6,18 @@ const isInteger =
         return typeof value === 'number' && isFinite(value) && Math.floor(value) === value
     }
 
+const isEmpty = val => {
+    return val === '' || val === null || val === undefined
+}
+
 class Rules {
     // 字符串类型, 即一般文本框
     // eslint-disable-next-line max-params
     string(text, max, min, trigger, required = true) {
         const rules = [
             {
-                type: 'string',
                 required,
+                type: 'string',
                 message: '请输入' + text,
                 trigger: trigger || 'blur'
             }
@@ -22,7 +26,7 @@ class Rules {
             rules.push({
                 required,
                 validator: (rule, value, callback) => {
-                    if (!required && (value === '' || value === null || value === undefined)) {
+                    if (!required && isEmpty(value)) {
                         return callback()
                     }
                     if (isInteger(max) && value.length > max) {
@@ -67,10 +71,10 @@ class Rules {
         rules.push({
             required,
             validator: (rule, value, callback) => {
-                if (!required && (value === '' || value === null || value === undefined)) {
+                if (!required && isEmpty(value)) {
                     return callback()
                 }
-                if (required && value === '') {
+                if (required && isEmpty(value)) {
                     return callback(new Error(text + '不能为空'))
                 }
                 const preg = /^(([0]{1})|([1-9][0-9]*))$/
@@ -86,7 +90,7 @@ class Rules {
             rules.push({
                 required,
                 validator: (rule, value, callback) => {
-                    if (!required && (value === '' || value === null || value === undefined)) {
+                    if (!required && isEmpty(value)) {
                         return callback()
                     }
                     if (isInteger(max) && Number(value) > max) {
@@ -110,10 +114,10 @@ class Rules {
         rules.push({
             required,
             validator: (rule, value, callback) => {
-                if (!required && (value === '' || value === null || value === undefined)) {
+                if (!required && isEmpty(value)) {
                     return callback()
                 }
-                if (required && value === '') {
+                if (required && isEmpty(value)) {
                     return callback(new Error(text + '不能为空'))
                 }
                 const preg = /^(([0]{1})|([1-9]\d*)|([1-9]\d*)(\.\d{1,2})|(0\.0[1-9]{1})|(0\.[1-9][0-9]{0,1}))$/
@@ -129,7 +133,7 @@ class Rules {
             rules.push({
                 required,
                 validator: (rule, value, callback) => {
-                    if (!required && (value === '' || value === null || value === undefined)) {
+                    if (!required && isEmpty(value)) {
                         return callback()
                     }
                     if (isNumber(max) && Number(value) > max) {
@@ -217,10 +221,10 @@ class Rules {
         rules.push({
             required,
             validator: (rule, value, callback) => {
-                if (!required && (value === '' || value === null || value === undefined)) {
+                if (!required && isEmpty(value)) {
                     return callback()
                 }
-                if (required && value === '') {
+                if (required && isEmpty(value)) {
                     return callback(new Error(text + '不能为空'))
                 }
                 const city = {
